@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "521523367206",
+    "project_id": "tarvuz-10d83",
+    "storage_bucket": "tarvuz-10d83.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:521523367206:android:45daa1990be9d5d2ad85e7",
+        "android_client_info": {
+          "package_name": "com.conamobile.tarvuz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "521523367206-o316kd7t0k28gfh410iorfkc01hi037e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSbhrsxpNKUNjYXKEKSqwaA0Ayt09tv8o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "521523367206-o316kd7t0k28gfh410iorfkc01hi037e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

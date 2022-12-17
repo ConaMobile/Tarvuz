@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Tarvuz</string>
+    <string name="input_phone_number">Telefon raqamingizni kiriting:</string>
+    <string name="input_sms_code">Smsda kelgan kodni kiriting</string>
+    <string name="input_name">Ismingizni kiriting:</string>
+    <string name="next">Keyingi</string>
+    <string name="input_name_example">Misol: Abdulloh</string>
+</resources>
