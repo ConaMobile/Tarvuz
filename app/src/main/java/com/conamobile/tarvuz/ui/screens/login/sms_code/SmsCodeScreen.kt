@@ -26,7 +26,6 @@ import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.SoftwareKeyboardController
@@ -80,7 +79,6 @@ fun SmsCodeScreen(navController: NavController, phoneNumber: String, activity: A
     val keyboard = LocalSoftwareKeyboardController.current
     val viewModel = hiltViewModel<LoginViewModel>()
     val buttonEnable = remember { mutableStateOf(false) }
-    val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val sendFailureMessage = remember { mutableStateOf("") }
     val showExitDialog = remember { mutableStateOf(false) }
@@ -414,8 +412,8 @@ fun checkSmsCode(
                 .collect {
                     when (it) {
                         is ResultState.Loading -> {
-                            focusManager.clearFocus()
                             keyboard?.hide()
+                            focusManager.clearFocus()
                             disableAllTextField(enable1,
                                 enable2,
                                 enable3,
@@ -425,8 +423,8 @@ fun checkSmsCode(
                             smsState.value = ResourceState.LOADING
                         }
                         is ResultState.Success -> {
-                            focusManager.clearFocus()
                             keyboard?.hide()
+                            focusManager.clearFocus()
                             disableAllTextField(enable1,
                                 enable2,
                                 enable3,
@@ -434,7 +432,14 @@ fun checkSmsCode(
                                 enable5,
                                 enable6)
                             smsState.value = ResourceState.SUCCESS
-                            navController.navigate(Screen.NameScreen.route)
+                            if (!viewModel.isFirstNavigation.value) {
+                                viewModel.isFirstNavigation.value = true
+                                navController.navigate(Screen.NameScreen.route) {
+                                    popUpTo(Screen.SmsCodeScreen.route) {
+                                        inclusive = true
+                                    }
+                                }
+                            }
                         }
                         is ResultState.Failure -> {
                             smsState.value = ResourceState.ERROR

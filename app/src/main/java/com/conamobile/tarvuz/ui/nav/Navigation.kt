@@ -5,13 +5,14 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.navigation.compose.rememberNavController
-import com.conamobile.tarvuz.ui.screens.home.HomeScreen
+import androidx.navigation.NavHostController
 import com.conamobile.tarvuz.ui.screens.login.name.NameScreen
 import com.conamobile.tarvuz.ui.screens.login.permission.PermissionScreen
 import com.conamobile.tarvuz.ui.screens.login.phone_number.PhoneNumberScreen
 import com.conamobile.tarvuz.ui.screens.login.sms_code.SmsCodeScreen
 import com.conamobile.tarvuz.ui.screens.login.welcome.WelcomeScreen
+import com.conamobile.tarvuz.ui.screens.main.MainScreen
+import com.conamobile.tarvuz.ui.screens.network.NetworkScreen
 import com.conamobile.tarvuz.ui.screens.splash.SplashScreen
 import com.fragula2.compose.FragulaNavHost
 import com.fragula2.compose.swipeable
@@ -22,8 +23,10 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 @ExperimentalAnimationApi
 @ExperimentalComposeUiApi
 @Composable
-fun Navigation(activity: Activity) {
-    val navController = rememberNavController()
+fun Navigation(
+    navController: NavHostController,
+    activity: Activity,
+) {
     FragulaNavHost(navController = navController,
         startDestination = Screen.SplashScreen.route,
         dimAmount = 0.3f,
@@ -35,9 +38,9 @@ fun Navigation(activity: Activity) {
             SplashScreen(navController = navController)
         }
         swipeable(
-            route = Screen.HomeScreen.route,
+            route = Screen.MainScreen.route,
         ) {
-            HomeScreen(navController = navController)
+            MainScreen(navController = navController)
         }
         swipeable(
             route = Screen.WelcomeScreen.route,
@@ -64,6 +67,11 @@ fun Navigation(activity: Activity) {
             route = Screen.PermissionScreen.route,
         ) {
             PermissionScreen()
+        }
+        swipeable(
+            route = Screen.NetworkScreen.route,
+        ) {
+            NetworkScreen(activity, navController)
         }
     }
 }

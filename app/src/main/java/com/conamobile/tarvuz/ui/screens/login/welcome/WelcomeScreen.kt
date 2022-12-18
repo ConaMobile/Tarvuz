@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -14,11 +15,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.conamobile.tarvuz.R
 import com.conamobile.tarvuz.ui.nav.Screen
+import com.conamobile.tarvuz.util.MySharedPreferences
 import com.conamobile.tarvuz.util.custom.LoginDefaultButton
 import com.conamobile.tarvuz.util.custom.ParentView
 
 @Composable
 fun WelcomeScreen(navController: NavController) {
+    val context = LocalContext.current
     ParentView(modifier = Modifier
         .fillMaxSize()
         .padding(bottom = 20.dp)) {
@@ -43,7 +46,11 @@ fun WelcomeScreen(navController: NavController) {
         }
 
         LoginDefaultButton(text = "Boshlash",
-            click = { navController.navigate(Screen.PhoneNumberScreen.route) },
+            click = {
+                if (MySharedPreferences(context).getUserPhone().isNullOrEmpty())
+                    navController.navigate(Screen.PhoneNumberScreen.route)
+                else navController.navigate(Screen.NameScreen.route)
+            },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()

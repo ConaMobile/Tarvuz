@@ -1,4 +1,4 @@
-package com.conamobile.tarvuz.ui.screens.home.drawer
+package com.conamobile.tarvuz.ui.screens.main.drawer
 
 import androidx.compose.runtime.Composable
 import com.conamobile.tarvuz.R

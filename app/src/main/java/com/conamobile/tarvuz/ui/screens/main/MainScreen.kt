@@ -1,4 +1,4 @@
-package com.conamobile.tarvuz.ui.screens.home
+package com.conamobile.tarvuz.ui.screens.main
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
@@ -13,8 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
-import com.conamobile.tarvuz.ui.screens.home.drawer.DrawerContent
-import com.conamobile.tarvuz.ui.screens.home.drawer.MyTopAppBar
+import com.conamobile.tarvuz.ui.screens.main.drawer.DrawerContent
+import com.conamobile.tarvuz.ui.screens.main.drawer.MyTopAppBar
 import com.conamobile.tarvuz.util.MySharedPreferences
 import com.conamobile.tarvuz.util.custom.ParentView
 import com.google.accompanist.insets.ui.Scaffold
@@ -22,7 +22,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun MainScreen(navController: NavController) {
     ParentView {
 
         val scaffoldState = rememberScaffoldState()

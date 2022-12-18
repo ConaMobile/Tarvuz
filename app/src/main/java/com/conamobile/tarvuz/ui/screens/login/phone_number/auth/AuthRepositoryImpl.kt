@@ -55,6 +55,7 @@ class AuthRepositoryImpl @Inject constructor(
         }
 
     override fun signInWithCredential(otp: String): Flow<ResultState<String>> = callbackFlow {
+        Log.d("@@@","init sign fire")
         trySend(ResultState.Loading)
         val credential = PhoneAuthProvider.getCredential(onVerificationCode, otp)
         authDb.signInWithCredential(credential).addOnCompleteListener {

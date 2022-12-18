@@ -6,7 +6,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.conamobile.tarvuz.ui.screens.login.di.model.GithubUser
 import com.conamobile.tarvuz.ui.screens.login.di.repository.LoginRepository
-import com.conamobile.tarvuz.util.MySharedPreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +20,7 @@ class LoginViewModel @Inject constructor(
     val phoneNumber = mutableStateOf("")
     val secondTimer = mutableStateOf("")
     val clientName = mutableStateOf("")
-    val sharedPreference = MySharedPreferences(application)
+    val isFirstNavigation = mutableStateOf(false)
 
     init {
 //        viewModelScope.launch {

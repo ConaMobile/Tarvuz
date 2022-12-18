@@ -60,7 +60,7 @@ fun PhoneNumberScreen(navController: NavController, activity: Activity) {
     val coroutineScope = rememberCoroutineScope()
     val sendFailureMessage = remember { mutableStateOf("") }
     val showExitDialog = remember { mutableStateOf(false) }
-    LaunchedEffect(focusRequester) {
+    LaunchedEffect(true) {
         if (showKeyboard.value) {
             focusRequester.requestFocus()
             keyboard?.show()

@@ -51,7 +51,7 @@ fun NameScreen(navController: NavController) {
     val focusRequester = remember { FocusRequester() }
     val keyboard = LocalSoftwareKeyboardController.current
     val context = LocalContext.current
-    LaunchedEffect(focusRequester) {
+    LaunchedEffect(true) {
         focusRequester.requestFocus()
         keyboard?.show()
     }
