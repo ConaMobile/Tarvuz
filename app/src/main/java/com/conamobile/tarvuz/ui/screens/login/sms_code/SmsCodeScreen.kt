@@ -42,7 +42,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.conamobile.tarvuz.R
 import com.conamobile.tarvuz.ui.nav.Screen
-import com.conamobile.tarvuz.ui.screens.login.di.vm.LoginViewModel
+import com.conamobile.tarvuz.ui.screens.login.mvvm.vm.LoginViewModel
 import com.conamobile.tarvuz.ui.screens.login.phone_number.auth.ResultState
 import com.conamobile.tarvuz.ui.theme.*
 import com.conamobile.tarvuz.util.custom.CustomExitDialog
@@ -51,7 +51,6 @@ import com.conamobile.tarvuz.util.custom.ParentView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
 
 @ExperimentalComposeUiApi
 @Composable
@@ -412,8 +411,6 @@ fun checkSmsCode(
                 .collect {
                     when (it) {
                         is ResultState.Loading -> {
-                            keyboard?.hide()
-                            focusManager.clearFocus()
                             disableAllTextField(enable1,
                                 enable2,
                                 enable3,
@@ -423,8 +420,6 @@ fun checkSmsCode(
                             smsState.value = ResourceState.LOADING
                         }
                         is ResultState.Success -> {
-                            keyboard?.hide()
-                            focusManager.clearFocus()
                             disableAllTextField(enable1,
                                 enable2,
                                 enable3,
@@ -434,14 +429,11 @@ fun checkSmsCode(
                             smsState.value = ResourceState.SUCCESS
                             if (!viewModel.isFirstNavigation.value) {
                                 viewModel.isFirstNavigation.value = true
-                                navController.navigate(Screen.NameScreen.route) {
-                                    popUpTo(Screen.SmsCodeScreen.route) {
-                                        inclusive = true
-                                    }
-                                }
+                                navController.navigate(Screen.NameScreen.route)
                             }
                         }
                         is ResultState.Failure -> {
+                            focusManager.clearFocus()
                             smsState.value = ResourceState.ERROR
                             enableAllTextField(enable1, enable2, enable3, enable4, enable5, enable6)
                         }

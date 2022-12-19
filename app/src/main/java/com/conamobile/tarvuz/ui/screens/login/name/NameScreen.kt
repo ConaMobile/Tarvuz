@@ -37,7 +37,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.conamobile.tarvuz.R
 import com.conamobile.tarvuz.ui.nav.Screen
-import com.conamobile.tarvuz.ui.screens.login.di.vm.LoginViewModel
+import com.conamobile.tarvuz.ui.screens.login.mvvm.vm.LoginViewModel
 import com.conamobile.tarvuz.ui.theme.DefaultDark
 import com.conamobile.tarvuz.ui.theme.DefaultYellow50
 import com.conamobile.tarvuz.util.MySharedPreferences

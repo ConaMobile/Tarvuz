@@ -1,7 +1,6 @@
 package com.conamobile.tarvuz.ui.screens.login.phone_number.auth
 
 import android.app.Activity
-import android.util.Log
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
@@ -55,7 +54,6 @@ class AuthRepositoryImpl @Inject constructor(
         }
 
     override fun signInWithCredential(otp: String): Flow<ResultState<String>> = callbackFlow {
-        Log.d("@@@","init sign fire")
         trySend(ResultState.Loading)
         val credential = PhoneAuthProvider.getCredential(onVerificationCode, otp)
         authDb.signInWithCredential(credential).addOnCompleteListener {

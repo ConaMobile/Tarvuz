@@ -9,63 +9,57 @@ fun prepareNavigationDrawerItems(): ArrayList<NavigationDrawerItem> {
 
     itemsList.add(
         NavigationDrawerItem(
-            image = R.drawable.flag_uzbekistan,
+            image = R.drawable.ic_home,
             label = "Bosh sahida"
         )
     )
     itemsList.add(
         NavigationDrawerItem(
-            image = R.drawable.ic_location,
+            image = R.drawable.ic_favorites,
             label = "Saqlab olinganlar",
             showUnreadBubble = true
         )
     )
     itemsList.add(
         NavigationDrawerItem(
-            image = R.drawable.ic_success,
+            image = R.drawable.ic_location,
             label = "Joylashuvni tanlash",
             showUnreadBubble = true
         )
     )
     itemsList.add(
         NavigationDrawerItem(
-            image = R.drawable.ic_success,
+            image = R.drawable.ic_post,
             label = "Mening e'lonlarim"
         )
     )
     itemsList.add(
         NavigationDrawerItem(
-            image = R.drawable.ic_success,
-            label = "Hisobingiz"
-        )
-    )
-    itemsList.add(
-        NavigationDrawerItem(
-            image = R.drawable.ic_success,
+            image = R.drawable.ic_ads,
             label = "Reklama berish"
         )
     )
     itemsList.add(
         NavigationDrawerItem(
-            image = R.drawable.ic_success,
+            image = R.drawable.ic_notification,
             label = "Bildirishnomalar"
         )
     )
     itemsList.add(
         NavigationDrawerItem(
-            image = R.drawable.ic_success,
+            image = R.drawable.ic_settings,
             label = "Sozlamalar"
         )
     )
     itemsList.add(
         NavigationDrawerItem(
-            image = R.drawable.ic_success,
+            image = R.drawable.ic_info,
             label = "Biz haqimizda"
         )
     )
     itemsList.add(
         NavigationDrawerItem(
-            image = R.drawable.ic_success,
+            image = R.drawable.ic_log_out,
             label = "Akkauntdan chiqish"
         )
     )

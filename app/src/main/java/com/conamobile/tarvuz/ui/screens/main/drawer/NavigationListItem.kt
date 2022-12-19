@@ -1,10 +1,10 @@
 package com.conamobile.tarvuz.ui.screens.main.drawer
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,12 +33,13 @@ fun NavigationListItem(
         // icon and unread bubble
         Box {
 
-            Image(
+            Icon(
                 modifier = Modifier
                     .padding(all = if (item.showUnreadBubble) 5.dp else 2.dp)
                     .size(size = if (item.showUnreadBubble) 24.dp else 28.dp),
                 painter = painterResource(id = item.image),
-                contentDescription = null
+                contentDescription = null,
+                tint = Color.White
             )
 
             // unread bubble

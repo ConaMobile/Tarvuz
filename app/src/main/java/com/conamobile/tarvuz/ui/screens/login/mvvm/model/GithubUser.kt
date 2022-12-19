@@ -1,4 +1,4 @@
-package com.conamobile.tarvuz.ui.screens.login.di.model
+package com.conamobile.tarvuz.ui.screens.login.mvvm.model
 
 data class GithubUser(
     val login: String,

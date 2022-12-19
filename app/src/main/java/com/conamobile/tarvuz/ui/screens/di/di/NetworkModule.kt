@@ -1,6 +1,6 @@
-package com.conamobile.tarvuz.ui.screens.login.di.di
+package com.conamobile.tarvuz.ui.screens.di.di
 
-import com.conamobile.tarvuz.ui.screens.login.di.db.LoginApiService
+import com.conamobile.tarvuz.ui.screens.di.db.ApiService
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -18,21 +18,18 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideBaseUrl(): String = "https://lncaqxlijlrqzerjdnym.supabase.co/"
+    fun provideBaseUrl(): String = "https://638dfd90aefc455fb2b1ae92.mockapi.io/api/"
 
     @Provides
     @Singleton
     fun provideRetrofit(baseUrl: String): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        return Retrofit.Builder().baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit): LoginApiService =
-        retrofit.create(LoginApiService::class.java)
+    fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
 
     @Singleton
     @Provides

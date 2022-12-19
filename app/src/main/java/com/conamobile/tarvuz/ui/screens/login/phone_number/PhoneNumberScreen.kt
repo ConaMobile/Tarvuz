@@ -22,7 +22,6 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextRange
@@ -36,7 +35,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.conamobile.tarvuz.R
 import com.conamobile.tarvuz.ui.nav.Screen
-import com.conamobile.tarvuz.ui.screens.login.di.vm.LoginViewModel
+import com.conamobile.tarvuz.ui.screens.login.mvvm.vm.LoginViewModel
 import com.conamobile.tarvuz.ui.screens.login.phone_number.auth.ResultState
 import com.conamobile.tarvuz.ui.theme.DefaultDark
 import com.conamobile.tarvuz.ui.theme.DefaultYellow50
@@ -60,6 +59,7 @@ fun PhoneNumberScreen(navController: NavController, activity: Activity) {
     val coroutineScope = rememberCoroutineScope()
     val sendFailureMessage = remember { mutableStateOf("") }
     val showExitDialog = remember { mutableStateOf(false) }
+    val phoneState = remember { mutableStateOf(PhoneState.DEFAULT) }
     LaunchedEffect(true) {
         if (showKeyboard.value) {
             focusRequester.requestFocus()
@@ -126,9 +126,13 @@ fun PhoneNumberScreen(navController: NavController, activity: Activity) {
                         keyboardActions = KeyboardActions(onDone = { keyboard?.hide() }))
                 }
             }
-        }
 
-        CustomSpacer(height = 20.dp)
+            CustomSpacer(height = 20.dp)
+
+            AnimatedVisibility(visible = phoneState.value == PhoneState.LOADING) {
+                Text(text = "Tekshirilmoqda...")
+            }
+        }
 
         val buttonEnable = viewModel.phoneNumber.value.length == 9
         val animatedButtonColor =
@@ -140,10 +144,9 @@ fun PhoneNumberScreen(navController: NavController, activity: Activity) {
                 viewModel,
                 viewModel.phoneNumber.value,
                 activity,
-                keyboard,
                 navController,
                 showExitDialog,
-                sendFailureMessage)
+                sendFailureMessage, phoneState)
         },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
@@ -175,25 +178,32 @@ fun sendSmsFirebase(
     viewModel: LoginViewModel,
     phoneNumber: String,
     activity: Activity,
-    keyboard: SoftwareKeyboardController?,
     navController: NavController,
     showExitDialog: MutableState<Boolean>,
     sendFailureMessage: MutableState<String>,
+    phoneState: MutableState<PhoneState>,
 ) {
     scope.launch(Dispatchers.Main) {
         viewModel.signInWithPhone(phoneNumber, activity).collect {
             when (it) {
                 is ResultState.Success -> {
+                    phoneState.value = PhoneState.SUCCESS
                     MySharedPreferences(activity).isUserPhone(viewModel.phoneNumber.value)
-                    keyboard?.hide()
                     navController.navigate("${Screen.SmsCodeScreen.route}/${viewModel.phoneNumber.value}")
                 }
                 is ResultState.Failure -> {
+                    phoneState.value = PhoneState.ERROR
                     showExitDialog.value = true
                     sendFailureMessage.value = it.msg.toString()
                 }
-                is ResultState.Loading -> {}
+                is ResultState.Loading -> {
+                    phoneState.value = PhoneState.LOADING
+                }
             }
         }
     }
+}
+
+enum class PhoneState {
+    DEFAULT, LOADING, SUCCESS, ERROR
 }
