@@ -2,28 +2,31 @@ package com.conamobile.tarvuz.ui.screens.main.bottom_screens.home.pagination
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.conamobile.tarvuz.ui.screens.main.mvvm.model.Posts
+import com.conamobile.tarvuz.ui.screens.main.mvvm.model.DummyList
 import com.conamobile.tarvuz.ui.screens.main.mvvm.repository.MainRepository
 
 class PostsPagingSource(
     private val repository: MainRepository,
-) : PagingSource<Int, Posts>() {
+) : PagingSource<Int, DummyList>() {
 
-    override fun getRefreshKey(state: PagingState<Int, Posts>): Int? {
-        return state.anchorPosition
+    override fun getRefreshKey(state: PagingState<Int, DummyList>): Int? {
+        return state.anchorPosition?.let { anchorPosition ->
+            val anchorPage = state.closestPageToPosition(anchorPosition)
+            anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
+        }
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Posts> = try {
-        val page = params.key ?: 1
-        val data = repository.loadPosts()
-        val dataItem = ArrayList<Posts>()
-        data.collect {
-            if (it.isSuccessful) dataItem.addAll(it.body() ?: emptyList())
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, DummyList> {
+        return try {
+            val nextPageNumber = params.key ?: 0
+            val response = repository.loadPostsDummy(nextPageNumber, 10)
+            LoadResult.Page(
+                data = response.users,
+                prevKey = null,
+                nextKey = if (response.users.isNotEmpty()) response.page + 1 else null
+            )
+        } catch (e: Exception) {
+            LoadResult.Error(e)
         }
-        LoadResult.Page(data = dataItem,
-            prevKey = null,
-            nextKey = if (dataItem.isEmpty()) null else page + 1)
-    } catch (e: Exception) {
-        LoadResult.Error(e)
     }
 }

@@ -1,6 +1,8 @@
-package com.conamobile.tarvuz.ui.screens.login.phone_number.auth
+package com.conamobile.tarvuz.ui.screens.login.mvvm.impl
 
 import android.app.Activity
+import com.conamobile.tarvuz.ui.screens.login.mvvm.db.LoginApiService
+import com.conamobile.tarvuz.ui.screens.login.mvvm.state.ResultState
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
@@ -14,9 +16,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AuthRepositoryImpl @Inject constructor(
+class LoginApiServiceImpl @Inject constructor(
     private val authDb: FirebaseAuth,
-) : AuthRepository {
+) : LoginApiService {
 
     private lateinit var onVerificationCode: String
 

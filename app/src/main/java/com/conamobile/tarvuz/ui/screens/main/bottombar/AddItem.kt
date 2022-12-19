@@ -29,10 +29,10 @@ fun RowScope.AddItem(
         onClick = {
             navController.navigate(screen.route) {
                 popUpTo(navController.graph.findStartDestination().id) {
-//                    saveState = true
+                    saveState = true
                 }
                 launchSingleTop = true
-//                restoreState = true
+                restoreState = true
             }
         },
         label = {

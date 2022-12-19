@@ -1,13 +1,12 @@
 package com.conamobile.tarvuz.ui.screens.main.mvvm.repository
 
-import com.conamobile.tarvuz.ui.screens.di.db.ApiService
-import kotlinx.coroutines.flow.flow
+import com.conamobile.tarvuz.ui.screens.main.mvvm.db.MainApiService
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class MainRepository @Inject constructor(
-    private val apiService: ApiService,
+    private val repository: MainApiService,
 ) {
-    suspend fun loadPosts() = flow { emit(apiService.loadPosts()) }
+    suspend fun loadPostsDummy(page: Int, limit: Int) = repository.loadPosts(page, limit)
 }

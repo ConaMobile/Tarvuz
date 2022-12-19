@@ -1,4 +1,4 @@
-package com.conamobile.tarvuz.ui.screens.login.phone_number.auth
+package com.conamobile.tarvuz.ui.screens.login.mvvm.state
 
 sealed class ResultState<out T> {
 

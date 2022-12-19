@@ -43,7 +43,7 @@ import androidx.navigation.NavController
 import com.conamobile.tarvuz.R
 import com.conamobile.tarvuz.ui.nav.Screen
 import com.conamobile.tarvuz.ui.screens.login.mvvm.vm.LoginViewModel
-import com.conamobile.tarvuz.ui.screens.login.phone_number.auth.ResultState
+import com.conamobile.tarvuz.ui.screens.login.mvvm.state.ResultState
 import com.conamobile.tarvuz.ui.theme.*
 import com.conamobile.tarvuz.util.custom.CustomExitDialog
 import com.conamobile.tarvuz.util.custom.CustomSpacer

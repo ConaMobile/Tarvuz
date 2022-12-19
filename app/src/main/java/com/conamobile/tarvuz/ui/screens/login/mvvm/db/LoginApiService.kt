@@ -1,9 +1,10 @@
-package com.conamobile.tarvuz.ui.screens.login.phone_number.auth
+package com.conamobile.tarvuz.ui.screens.login.mvvm.db
 
 import android.app.Activity
+import com.conamobile.tarvuz.ui.screens.login.mvvm.state.ResultState
 import kotlinx.coroutines.flow.Flow
 
-interface AuthRepository {
+interface LoginApiService {
 
     fun createUserWithPhone(
         phone: String,
